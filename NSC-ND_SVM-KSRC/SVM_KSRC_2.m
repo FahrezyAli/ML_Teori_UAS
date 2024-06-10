@@ -1,8 +1,8 @@
 clc;
 addpath function
-xlsdata = readmatrix('NSC-ND.xlsx');
+csvdata = readmatrix('NSC-ND.csv');
 
-[~,data_len] = size(xlsdata);
+[~,data_len] = size(csvdata);
 opt.lambda = 0.01;
 opt.tol = 1e-6;
 opt.iter_num = 2000;
@@ -20,7 +20,7 @@ sensum = 0;
 spesum = 0;
 
     for ten = 1:10
-        [test_data,test_label,train_data,train_label] = tenfold(xlsdata([testrange,101:150],1:data_len-1),xlsdata([testrange,101:150],data_len));  %%
+        [test_data,test_label,train_data,train_label] = tenfold(csvdata([testrange,101:150],1:data_len-1),csvdata([testrange,101:150],data_len));  %%
         label = zeros(testnum,10);
 
         rightnums = 0;

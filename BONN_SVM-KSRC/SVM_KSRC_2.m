@@ -1,7 +1,7 @@
 clc;clear;
 addpath function
-xlsdata = readmatrix('Bonn.xlsx');  % Read in feature data
-[~,data_len] = size(xlsdata);
+csvdata = readmatrix('Bonn.csv');  % Read in feature data
+[~,data_len] = size(csvdata);
 %parameter assignment
 opt.lambda = 0.01;
 opt.tol = 1e-6;
@@ -25,7 +25,7 @@ for sl = 11:55
     spesum = 0;
 
     for ten = 1:tennum
-        [test_data,test_label,train_data,train_label] = tenfold(xlsdata([testrange,401:500],1:data_len-1),xlsdata([testrange,401:500],data_len));
+        [test_data,test_label,train_data,train_label] = tenfold(csvdata([testrange,401:500],1:data_len-1),csvdata([testrange,401:500],data_len));
         label = zeros(testnum,10);
 
         rightnums = 0;
@@ -83,7 +83,7 @@ for sl = 11:55
         spesum = spesum + spe;
         
     end
-    disp(['Average£ºacc=',num2str(accsum/tennum),'%,','sen=',num2str(sensum/tennum),'%,','spe=',num2str(spesum/tennum),'%']);
+    disp(['Averageï¿½ï¿½acc=',num2str(accsum/tennum),'%,','sen=',num2str(sensum/tennum),'%,','spe=',num2str(spesum/tennum),'%']);
 end
 
 

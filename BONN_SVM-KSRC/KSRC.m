@@ -1,7 +1,7 @@
 clc;clear;
 addpath function
-xlsdata = readmatrix('Bonn.xlsx');  % Read in feature data
-[~,data_len] = size(xlsdata);
+csvdata = readmatrix('Bonn.csv');  % Read in feature data
+[~,data_len] = size(csvdata);
 %parameter assignment
 opt.lambda = 0.01;
 opt.tol = 1e-6;
@@ -18,7 +18,7 @@ sensum = 0;
 spesum = 0;
 for ten = 1:tennum
     %Random assignment of ten-fold cross-validation data
-    [test_data,test_label,train_data,train_label] = tenfold(xlsdata([testrange,401:500],1:data_len-1),xlsdata([testrange,401:500],data_len));
+    [test_data,test_label,train_data,train_label] = tenfold(csvdata([testrange,401:500],1:data_len-1),csvdata([testrange,401:500],data_len));
     label = zeros(testnum,10);  %
 
     rightnums = 0;

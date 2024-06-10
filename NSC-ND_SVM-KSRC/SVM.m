@@ -1,7 +1,7 @@
 clc;clear;
 addpath function
-xlsdata = readmatrix('NSC-ND.xlsx');
-[~,data_len] = size(xlsdata);
+csvdata = readmatrix('NSC-ND.csv');
+[~,data_len] = size(csvdata);
 fealabel = [10,55,175,385,637,847,967,1012,1022,1023];
 Case = {1:50,51:100,1:100};
 f = 1;
@@ -17,7 +17,7 @@ for sl = (fealabel(f)+1):fealabel(f+1)
     sensum = 0;
     spesum = 0;
     for ten = 1:tennum
-    [test_data,test_label,train_data,train_label] = tenfold(xlsdata([testrange,101:150],1:10),xlsdata([testrange,101:150],data_len));  
+    [test_data,test_label,train_data,train_label] = tenfold(csvdata([testrange,101:150],1:10),csvdata([testrange,101:150],data_len));  
 
     label = zeros(testnum,10);
     rightnums = 0;

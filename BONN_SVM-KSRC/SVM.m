@@ -1,8 +1,8 @@
 clc;
 clear;
 addpath function
-xlsdata = readmatrix('Bonn.xlsx');
-[~,data_len] = size(xlsdata);
+csvdata = readmatrix('Bonn.csv');
+[~,data_len] = size(csvdata);
 fealabel = [10,55,175,385,637,847,967,1012,1022,1023];
 Case = {1:100,101:200,201:300,301:400,1:200,201:400,1:400};
 f = 3;
@@ -19,7 +19,7 @@ for sl = (fealabel(f)+1):fealabel(f+1)
     spesum = 0;
 
     for ten = 1:tennum
-     [test_data,test_label,train_data,train_label] = tenfold(xlsdata([testrange,401:500],1:data_len-1),xlsdata([testrange,401:500],data_len));
+     [test_data,test_label,train_data,train_label] = tenfold(csvdata([testrange,401:500],1:data_len-1),csvdata([testrange,401:500],data_len));
     label = zeros(testnum,10);
     rightnums = 0;
 

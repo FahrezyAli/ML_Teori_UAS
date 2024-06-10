@@ -1,7 +1,7 @@
 clc;
 addpath function
-xlsdata = readmatrix('BonN.xlsx');
-[~,data_len] = size(xlsdata);
+csvdata = readmatrix('BonN.csv');
+[~,data_len] = size(csvdata);
 opt.lambda = 0.01;
 opt.tol = 1e-6;
 opt.iter_num = 2000;
@@ -23,7 +23,7 @@ for sl = best_feature(Test)   %1013:1022
     spesum = 0;
 
     for ten = 1:10
-        [test_data,test_label,train_data,train_label] = tenfold(xlsdata([testrange,401:500],1:data_len-1),xlsdata([testrange,401:500],data_len)); 
+        [test_data,test_label,train_data,train_label] = tenfold(csvdata([testrange,401:500],1:data_len-1),csvdata([testrange,401:500],data_len)); 
         label = zeros(testnum,10);
 
         rightnums = 0;
