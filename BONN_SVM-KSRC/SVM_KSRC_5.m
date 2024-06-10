@@ -1,6 +1,6 @@
 clc;
 addpath function
-xlsdata = xlsread('Bonn.xlsx');
+xlsdata = readmatrix('Bonn.xlsx');
 [~,data_len] = size(xlsdata);
 opt.lambda = 0.01;
 opt.tol = 1e-6;
@@ -86,6 +86,6 @@ for sl = best_feature(Test)           %386:637
         sensum = sensum + sen;
         spesum = spesum + spe;
     end
-    disp(['Average£ºacc=',num2str(accsum/tennum),'%,','sen=',num2str(sensum/tennum),'%,','spe=',num2str(spesum/tennum),'%']);
+    disp(['Averageï¿½ï¿½acc=',num2str(accsum/tennum),'%,','sen=',num2str(sensum/tennum),'%,','spe=',num2str(spesum/tennum),'%']);
 end
 

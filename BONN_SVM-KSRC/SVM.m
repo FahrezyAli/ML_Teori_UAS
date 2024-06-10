@@ -1,7 +1,7 @@
 clc;
 clear;
 addpath function
-xlsdata = xlsread('Bonn.xlsx');
+xlsdata = readmatrix('Bonn.xlsx');
 [~,data_len] = size(xlsdata);
 fealabel = [10,55,175,385,637,847,967,1012,1022,1023];
 Case = {1:100,101:200,201:300,301:400,1:200,201:400,1:400};
@@ -13,7 +13,7 @@ testrange = Case{Test};
 testnum = 10+length(testrange)/10;
 for sl = (fealabel(f)+1):fealabel(f+1)
     SvmFeature =  SvmLabel{sl};
-    disp(['Feature No.£º',num2str(SvmFeature)]);
+    disp(['Feature No.ï¿½ï¿½',num2str(SvmFeature)]);
     accsum = 0;
     sensum = 0;
     spesum = 0;
@@ -50,7 +50,7 @@ for sl = (fealabel(f)+1):fealabel(f+1)
         spesum = spesum + spe;
 
     end
-    disp(['Average£ºacc=',num2str(accsum/tennum),'%,','sen=',num2str(sensum/tennum),'%,','spe=',num2str(spesum/tennum),'%']);
+    disp(['Averageï¿½ï¿½acc=',num2str(accsum/tennum),'%,','sen=',num2str(sensum/tennum),'%,','spe=',num2str(spesum/tennum),'%']);
 end
 
 

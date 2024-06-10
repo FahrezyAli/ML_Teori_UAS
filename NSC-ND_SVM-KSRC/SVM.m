@@ -1,6 +1,6 @@
 clc;clear;
 addpath function
-xlsdata = xlsread('NSC-ND.xlsx');
+xlsdata = readmatrix('NSC-ND.xlsx');
 [~,data_len] = size(xlsdata);
 fealabel = [10,55,175,385,637,847,967,1012,1022,1023];
 Case = {1:50,51:100,1:100};
@@ -49,7 +49,7 @@ for sl = (fealabel(f)+1):fealabel(f+1)
     spesum = spesum + spe;
 
     end
-    disp(['Average£ºacc=',num2str(accsum/tennum),'%,','sen=',num2str(sensum/tennum),'%,','spe=',num2str(spesum/tennum),'%']);
+    disp(['Averageï¿½ï¿½acc=',num2str(accsum/tennum),'%,','sen=',num2str(sensum/tennum),'%,','spe=',num2str(spesum/tennum),'%']);
 
 end
 

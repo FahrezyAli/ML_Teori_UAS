@@ -31,6 +31,6 @@ for i = 1:5
         num = num + 1;
     end 
 end
-xlswrite('Bonn.xlsx',xlsdata);
+writematrix(xlsdata,"Bonn.csv");
 close(h);
 

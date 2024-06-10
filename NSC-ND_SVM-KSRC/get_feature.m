@@ -4,6 +4,7 @@ addpath function;
 dataname ={'X','Y','Z'};
 
 Fs = 200;
+xlsdata = zeros(150,261);
 num = 1;
 
 for i = 1:3
@@ -41,7 +42,7 @@ for i = 1:3
         num = num + 1;
     end 
 end
-xlswrite('NSC-ND.xlsx',xlsdata);
+writematrix(xlsdata,'NSC-ND.csv');
 close(h);
 
  

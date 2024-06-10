@@ -1,6 +1,6 @@
 clc;
 addpath function
-xlsdata = xlsread('NSC-ND.xlsx');
+xlsdata = readmatrix('NSC-ND.xlsx');
 
 [~,data_len] = size(xlsdata);
 opt.lambda = 0.01;
@@ -78,7 +78,7 @@ spesum = 0;
         sensum = sensum + sen;
         spesum = spesum + spe;
     end
-    disp(['Average£ºacc=',num2str(accsum/10),'%,','sen=',num2str(sensum/10),'%,','spe=',num2str(spesum/10),'%']);
+    disp(['Averageï¿½ï¿½acc=',num2str(accsum/10),'%,','sen=',num2str(sensum/10),'%,','spe=',num2str(spesum/10),'%']);
 end
 
 

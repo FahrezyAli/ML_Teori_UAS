@@ -1,6 +1,6 @@
 clc;clear;
 addpath function
-xlsdata = xlsread('Bonn.xlsx');  % Read in feature data
+xlsdata = readmatrix('Bonn.xlsx');  % Read in feature data
 [~,data_len] = size(xlsdata);
 %parameter assignment
 opt.lambda = 0.01;
