@@ -92,7 +92,7 @@ spesum = 0;
 
 
     end
-    disp(['Average��acc=',num2str(accsum/10),'%,','sen=',num2str(sensum/10),'%,','spe=',num2str(spesum/10),'%']);
+    disp(['Average: acc=',num2str(accsum/10),'%,','sen=',num2str(sensum/10),'%,','spe=',num2str(spesum/10),'%']);
 
 end
 
