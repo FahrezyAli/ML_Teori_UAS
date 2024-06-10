@@ -14,4 +14,3 @@ for i = 1 : 10
     train_data{i} = dataset(train,:);
     train_label{i} = labelset(train,:);
 end
-

@@ -33,4 +33,3 @@ for i = 1:5
 end
 writematrix(csvdata,"Bonn.csv");
 close(h);
-

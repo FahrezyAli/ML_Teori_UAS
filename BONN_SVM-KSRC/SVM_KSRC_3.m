@@ -83,4 +83,3 @@ for sl = 11:50
     end
     disp(['Average: acc=',num2str(accsum/tennum),'%,','sen=',num2str(sensum/tennum),'%,','spe=',num2str(spesum/tennum),'%']);
 end
-

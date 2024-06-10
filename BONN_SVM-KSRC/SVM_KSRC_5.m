@@ -88,4 +88,3 @@ for sl = best_feature(Test)           %386:637
     end
     disp(['Average: acc=',num2str(accsum/tennum),'%,','sen=',num2str(sensum/tennum),'%,','spe=',num2str(spesum/tennum),'%']);
 end
-

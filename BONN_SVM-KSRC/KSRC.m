@@ -59,4 +59,3 @@ for ten = 1:tennum
     spesum = spesum + spe;
 end
 disp(['Average: acc=',num2str(accsum/tennum),'%,','sen=',num2str(sensum/tennum),'%,','spe=',num2str(spesum/tennum),'%']);
-

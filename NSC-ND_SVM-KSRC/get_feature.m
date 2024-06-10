@@ -44,9 +44,3 @@ for i = 1:3
 end
 writematrix(csvdata,'NSC-ND.csv');
 close(h);
-
- 
-
-
-
-
