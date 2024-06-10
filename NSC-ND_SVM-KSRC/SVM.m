@@ -22,17 +22,17 @@ for sl = (fealabel(f)+1):fealabel(f+1)
     label = zeros(testnum,10);
     rightnums = 0;
     for j = 1:10
-         traindata = train_data{j};
-         testdata = test_data{j};
+        traindata = train_data{j};
+        testdata = test_data{j};
 
-         trainsvm = traindata(:,SvmFeature); 
-         testsvm = testdata(:,SvmFeature);
+        trainsvm = traindata(:,SvmFeature); 
+        testsvm = testdata(:,SvmFeature);
 
-         SVMModel = fitcsvm(trainsvm,train_label{j},'Standardize',true,'KernelFunction','linear'); 
-         for i = 1:testnum
+        SVMModel = fitcsvm(trainsvm,train_label{j},'Standardize',true,'KernelFunction','linear'); 
+        for i = 1:testnum
                 [predict_label_s,scores_s] = predict(SVMModel, testsvm(i,:));
                 label(i,j) = predict_label_s;
-         end
+        end
     end
     TP = length(find(label(testnum-4:testnum,1:10)==1));
     FP = length(find(label(1:testnum-5,1:10)==1));

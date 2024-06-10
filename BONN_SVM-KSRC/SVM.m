@@ -19,22 +19,22 @@ for sl = (fealabel(f)+1):fealabel(f+1)
     spesum = 0;
 
     for ten = 1:tennum
-     [test_data,test_label,train_data,train_label] = tenfold(csvdata([testrange,401:500],1:data_len-1),csvdata([testrange,401:500],data_len));
+    [test_data,test_label,train_data,train_label] = tenfold(csvdata([testrange,401:500],1:data_len-1),csvdata([testrange,401:500],data_len));
     label = zeros(testnum,10);
     rightnums = 0;
 
         for j = 1:10
-             traindata = train_data{j};
-             testdata = test_data{j};
-             %SVM data
-             trainsvm = traindata(:,SvmFeature); 
-             testsvm = testdata(:,SvmFeature);
-             %Train SVM
-             SVMModel = fitcsvm(trainsvm,train_label{j},'Standardize',true,'KernelFunction','linear'); 
-             for i = 1:testnum
+            traindata = train_data{j};
+            testdata = test_data{j};
+            %SVM data
+            trainsvm = traindata(:,SvmFeature); 
+            testsvm = testdata(:,SvmFeature);
+            %Train SVM
+            SVMModel = fitcsvm(trainsvm,train_label{j},'Standardize',true,'KernelFunction','linear'); 
+            for i = 1:testnum
                     [predict_label_s,scores_s] = predict(SVMModel, testsvm(i,:));
                     label(i,j) = predict_label_s;
-             end
+            end
         end
         TP = length(find(label(testnum-9:testnum,1:10)==1));
         FP = length(find(label(1:testnum-10,1:10)==1));

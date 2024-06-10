@@ -27,42 +27,42 @@ spesum = 0;
         SRCrun = 0;
         SVMrun = 0;
         for j = 1:10
-             traindata = train_data{j};
-             testdata = test_data{j};
+            traindata = train_data{j};
+            testdata = test_data{j};
 
-             trainsvm = traindata(:,SvmFeature); 
-             testsvm = testdata(:,SvmFeature);
+            trainsvm = traindata(:,SvmFeature); 
+            testsvm = testdata(:,SvmFeature);
 
-             SVMModel = fitcsvm(trainsvm,train_label{1},'Standardize',true,'KernelFunction','linear'); 
-             supportvector = [trainsvm(SVMModel.IsSupportVector,1),trainsvm(SVMModel.IsSupportVector,2)];
-             supportarea = ScatterHull(supportvector,180);
-             [in,on] = inpolygon(testsvm(:,1),testsvm(:,2),supportarea(:,1),supportarea(:,2));
+            SVMModel = fitcsvm(trainsvm,train_label{1},'Standardize',true,'KernelFunction','linear'); 
+            supportvector = [trainsvm(SVMModel.IsSupportVector,1),trainsvm(SVMModel.IsSupportVector,2)];
+            supportarea = ScatterHull(supportvector,180);
+            [in,on] = inpolygon(testsvm(:,1),testsvm(:,2),supportarea(:,1),supportarea(:,2));
 
-             A = traindata(:,11:data_len-1)';
-             testSC = testdata(:,11:data_len-1)';
-             KAA = Gsker(A,A,p); 
-             for i = 1:testnum
+            A = traindata(:,11:data_len-1)';
+            testSC = testdata(:,11:data_len-1)';
+            KAA = Gsker(A,A,p); 
+            for i = 1:testnum
 
-                 if in(i) == 1 || on(i) == 1    
-                       SRCrun = SRCrun + 1;   
-                       y = testSC(:,i);
-                       KAy = Gsker(A,y,p); 
-                       [beta,~] = KernelCoorDescent(KAA,KAy,opt);
-                       beta1 = [beta(1:(9*testnum-45));zeros(45,1)];  
-                       beta2 = [zeros((9*testnum-45),1);beta((9*testnum-44):9*testnum)]; 
-                       err1 = y - A*beta1;
-                       err2 = y - A*beta2;
-                       err = [err1'*err1,err2'*err2];
-                       if err(1) == err(2)
-                           continue;
-                       end
-                       label(i,j) = find(err==min(err)) - 1;           
-                 else  
-                       SVMrun = SVMrun + 1;
-                       [predict_label_s,scores_s] = predict(SVMModel, testsvm(i,:));
-                       label(i,j) = predict_label_s;
-                 end
-             end
+                if in(i) == 1 || on(i) == 1    
+                    SRCrun = SRCrun + 1;   
+                    y = testSC(:,i);
+                    KAy = Gsker(A,y,p); 
+                    [beta,~] = KernelCoorDescent(KAA,KAy,opt);
+                    beta1 = [beta(1:(9*testnum-45));zeros(45,1)];  
+                    beta2 = [zeros((9*testnum-45),1);beta((9*testnum-44):9*testnum)]; 
+                    err1 = y - A*beta1;
+                    err2 = y - A*beta2;
+                    err = [err1'*err1,err2'*err2];
+                    if err(1) == err(2)
+                        continue;
+                    end
+                    label(i,j) = find(err==min(err)) - 1;           
+                else  
+                    SVMrun = SVMrun + 1;
+                    [predict_label_s,scores_s] = predict(SVMModel, testsvm(i,:));
+                    label(i,j) = predict_label_s;
+                end
+            end
         end
         TP = length(find(label(testnum-4:testnum,1:10)==1));
         FP = length(find(label(1:testnum-5,1:10)==1));

@@ -28,25 +28,25 @@ for sl = 11:50
 
         rightnums = 0;
         for j = 1:10
-             traindata = train_data{j};
-             testdata = test_data{j};
+            traindata = train_data{j};
+            testdata = test_data{j};
 
-             trainsvm = traindata(:,SvmFeature); 
-             testsvm = testdata(:,SvmFeature);
+            trainsvm = traindata(:,SvmFeature); 
+            testsvm = testdata(:,SvmFeature);
 
-             SVMModel = fitcsvm(trainsvm,train_label{1},'Standardize',true,'KernelFunction','linear'); 
-             supportvector = [trainsvm(SVMModel.IsSupportVector,1),trainsvm(SVMModel.IsSupportVector,2),trainsvm(SVMModel.IsSupportVector,3)];
-             supportarea1 = ScatterHull(supportvector(:,1:2),180); 
-             supportarea2 = ScatterHull(supportvector(:,2:3),180);
-             [in1,on1] = inpolygon(testsvm(:,1),testsvm(:,2),supportarea1(:,1),supportarea1(:,2));
-             [in2,on2] = inpolygon(testsvm(:,2),testsvm(:,3),supportarea2(:,1),supportarea2(:,2));
-             in = in1&in2;
-             on = on1&on2;
+            SVMModel = fitcsvm(trainsvm,train_label{1},'Standardize',true,'KernelFunction','linear'); 
+            supportvector = [trainsvm(SVMModel.IsSupportVector,1),trainsvm(SVMModel.IsSupportVector,2),trainsvm(SVMModel.IsSupportVector,3)];
+            supportarea1 = ScatterHull(supportvector(:,1:2),180); 
+            supportarea2 = ScatterHull(supportvector(:,2:3),180);
+            [in1,on1] = inpolygon(testsvm(:,1),testsvm(:,2),supportarea1(:,1),supportarea1(:,2));
+            [in2,on2] = inpolygon(testsvm(:,2),testsvm(:,3),supportarea2(:,1),supportarea2(:,2));
+            in = in1&in2;
+            on = on1&on2;
 
-             A = traindata(:,11:data_len-1)';
-             testSC = testdata(:,11:data_len-1)';
-             KAA = Gsker(A,A,p); 
-             for i = 1:testnum
+            A = traindata(:,11:data_len-1)';
+            testSC = testdata(:,11:data_len-1)';
+            KAA = Gsker(A,A,p); 
+            for i = 1:testnum
 
                 if in(i) == 1 || on(i) == 1   
                     y = testSC(:,i);
@@ -65,7 +65,7 @@ for sl = 11:50
                     [predict_label_s,scores_s] = predict(SVMModel, testsvm(i,:));
                     label(i,j) = predict_label_s;
                 end
-             end
+            end
         end
         TP = length(find(label(testnum-9:testnum,1:10)==1));
         FP = length(find(label(1:testnum-10,1:10)==1));

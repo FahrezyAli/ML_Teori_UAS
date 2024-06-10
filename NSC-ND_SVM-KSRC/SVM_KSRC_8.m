@@ -27,46 +27,46 @@ spesum = 0;
     SRCrun = 0;
     SVMrun = 0;
     for j = 1:10
-         traindata = train_data{j};
-         testdata = test_data{j};
+        traindata = train_data{j};
+        testdata = test_data{j};
 
-         trainsvm = traindata(:,SvmFeature); 
-         testsvm = testdata(:,SvmFeature);
+        trainsvm = traindata(:,SvmFeature); 
+        testsvm = testdata(:,SvmFeature);
 
-         SVMModel = fitcsvm(trainsvm,train_label{1},'Standardize',true,'KernelFunction','linear');  
-         supportvector = [trainsvm(SVMModel.IsSupportVector,1),trainsvm(SVMModel.IsSupportVector,2),...
-             trainsvm(SVMModel.IsSupportVector,3),trainsvm(SVMModel.IsSupportVector,4),...
-             trainsvm(SVMModel.IsSupportVector,5),trainsvm(SVMModel.IsSupportVector,6),...
-             trainsvm(SVMModel.IsSupportVector,7),trainsvm(SVMModel.IsSupportVector,8)];
-         supportarea1 = ScatterHull(supportvector(:,1:2),180);  
-         supportarea2 = ScatterHull(supportvector(:,2:3),180);
-         supportarea3 = ScatterHull(supportvector(:,3:4),180);
-         supportarea4 = ScatterHull(supportvector(:,4:5),180);
-         supportarea5 = ScatterHull(supportvector(:,5:6),180);
-         supportarea6 = ScatterHull(supportvector(:,6:7),180);
-         supportarea7 = ScatterHull(supportvector(:,7:8),180);
-         [in1,on1] = inpolygon(testsvm(:,1),testsvm(:,2),supportarea1(:,1),supportarea1(:,2));
-         [in2,on2] = inpolygon(testsvm(:,2),testsvm(:,3),supportarea2(:,1),supportarea2(:,2));
-         [in3,on3] = inpolygon(testsvm(:,3),testsvm(:,4),supportarea3(:,1),supportarea3(:,2));
-         [in4,on4] = inpolygon(testsvm(:,4),testsvm(:,5),supportarea4(:,1),supportarea4(:,2));
-         [in5,on5] = inpolygon(testsvm(:,5),testsvm(:,6),supportarea5(:,1),supportarea5(:,2));
-         [in6,on6] = inpolygon(testsvm(:,6),testsvm(:,7),supportarea6(:,1),supportarea6(:,2));
-         [in7,on7] = inpolygon(testsvm(:,7),testsvm(:,8),supportarea7(:,1),supportarea7(:,2));
-         in = (in1&in2)&(in3&in4)&(in5&in6)&in7;
-         on = (on1&on2)&(on3&on4)&(on5&on6)&on7;
+        SVMModel = fitcsvm(trainsvm,train_label{1},'Standardize',true,'KernelFunction','linear');  
+        supportvector = [trainsvm(SVMModel.IsSupportVector,1),trainsvm(SVMModel.IsSupportVector,2),...
+            trainsvm(SVMModel.IsSupportVector,3),trainsvm(SVMModel.IsSupportVector,4),...
+            trainsvm(SVMModel.IsSupportVector,5),trainsvm(SVMModel.IsSupportVector,6),...
+            trainsvm(SVMModel.IsSupportVector,7),trainsvm(SVMModel.IsSupportVector,8)];
+        supportarea1 = ScatterHull(supportvector(:,1:2),180);  
+        supportarea2 = ScatterHull(supportvector(:,2:3),180);
+        supportarea3 = ScatterHull(supportvector(:,3:4),180);
+        supportarea4 = ScatterHull(supportvector(:,4:5),180);
+        supportarea5 = ScatterHull(supportvector(:,5:6),180);
+        supportarea6 = ScatterHull(supportvector(:,6:7),180);
+        supportarea7 = ScatterHull(supportvector(:,7:8),180);
+        [in1,on1] = inpolygon(testsvm(:,1),testsvm(:,2),supportarea1(:,1),supportarea1(:,2));
+        [in2,on2] = inpolygon(testsvm(:,2),testsvm(:,3),supportarea2(:,1),supportarea2(:,2));
+        [in3,on3] = inpolygon(testsvm(:,3),testsvm(:,4),supportarea3(:,1),supportarea3(:,2));
+        [in4,on4] = inpolygon(testsvm(:,4),testsvm(:,5),supportarea4(:,1),supportarea4(:,2));
+        [in5,on5] = inpolygon(testsvm(:,5),testsvm(:,6),supportarea5(:,1),supportarea5(:,2));
+        [in6,on6] = inpolygon(testsvm(:,6),testsvm(:,7),supportarea6(:,1),supportarea6(:,2));
+        [in7,on7] = inpolygon(testsvm(:,7),testsvm(:,8),supportarea7(:,1),supportarea7(:,2));
+        in = (in1&in2)&(in3&in4)&(in5&in6)&in7;
+        on = (on1&on2)&(on3&on4)&(on5&on6)&on7;
 
-         A = traindata(:,11:data_len-1)';
-         testSC = testdata(:,11:data_len-1)';
-         KAA = Gsker(A,A,p); 
-         for i = 1:testnum
+        A = traindata(:,11:data_len-1)';
+        testSC = testdata(:,11:data_len-1)';
+        KAA = Gsker(A,A,p); 
+        for i = 1:testnum
 
-             if in(i) == 1 || on(i) == 1    
+            if in(i) == 1 || on(i) == 1    
                 SRCrun = SRCrun + 1;   
                 y = testSC(:,i);
-                 KAy = Gsker(A,y,p); 
+                KAy = Gsker(A,y,p); 
                 [beta,~] = KernelCoorDescent(KAA,KAy,opt);
                 beta1 = [beta(1:(9*testnum-45));zeros(45,1)];  
-                       beta2 = [zeros((9*testnum-45),1);beta((9*testnum-44):9*testnum)]; 
+                beta2 = [zeros((9*testnum-45),1);beta((9*testnum-44):9*testnum)]; 
                 err1 = y - A*beta1;
                 err2 = y - A*beta2;
                 err = [err1'*err1,err2'*err2];
@@ -79,7 +79,7 @@ spesum = 0;
                 [predict_label_s,scores_s] = predict(SVMModel, testsvm(i,:));
                 label(i,j) = predict_label_s;
             end
-         end
+        end
     end
     TP = length(find(label(testnum-4:testnum,1:10)==1));
     FP = length(find(label(1:testnum-5,1:10)==1));

@@ -16,13 +16,13 @@ testnum = 15;  %%
 label = zeros(testnum,10);
 rightnums = 0;
     for j = 1:10
-         traindata = train_data{j};
-         testdata = test_data{j};
+        traindata = train_data{j};
+        testdata = test_data{j};
 
-         A = traindata(:,11:260)';
-         testSC = testdata(:,11:260)';
-         KAA = Gsker(A,A,p); 
-         for i = 1:testnum
+        A = traindata(:,11:260)';
+        testSC = testdata(:,11:260)';
+        KAA = Gsker(A,A,p); 
+        for i = 1:testnum
                 y = testSC(:,i);
                 KAy = Gsker(A,y,p); 
                 [beta,~] = KernelCoorDescent(KAA,KAy,opt);
@@ -35,7 +35,7 @@ rightnums = 0;
                     continue;
                 end
                 label(i,j) = find(err==min(err)) - 1;           
-         end
+        end
     end
 TP = length(find(label(testnum-4:testnum,1:10)==1));
 FP = length(find(label(1:testnum-5,1:10)==1));

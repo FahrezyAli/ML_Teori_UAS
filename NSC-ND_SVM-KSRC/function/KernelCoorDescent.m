@@ -20,7 +20,7 @@ end
 % initializition
 
 
-[P, N]= size(R);
+[~, N]= size(R);
 beta = zeros( N, 1 );
 for iter = 1: iter_num
     prebeta = beta;

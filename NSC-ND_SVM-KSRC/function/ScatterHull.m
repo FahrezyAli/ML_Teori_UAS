@@ -17,24 +17,24 @@ while ~isempty(im)
 im=[];
 
 for i=1:n
-    if i==1 
-          v1=y1(n,:)-y1(1,:);
-          v2=y1(2,:)-y1(1,:); 
-    elseif i==n 
-          v1=y1(n-1,:)-y1(n,:); 
-          v2=y1(1,:)-y1(n,:); 
-    else 
+      if i==1 
+            v1=y1(n,:)-y1(1,:);
+            v2=y1(2,:)-y1(1,:); 
+      elseif i==n 
+            v1=y1(n-1,:)-y1(n,:); 
+            v2=y1(1,:)-y1(n,:); 
+      else 
 	      v1=y1(i-1,:)-y1(i,:);
-          v2=y1(i+1,:)-y1(i,:);
-    end
-    r=det([v1;v2]); 
+            v2=y1(i+1,:)-y1(i,:);
+      end
+      r=det([v1;v2]); 
 	c=dot(v1,v2)/(norm(v1)*norm(v2));
-    ang=rad2deg(acos(c));
+      ang=rad2deg(acos(c));
 	
-    if r<=0&&(ang<ang_2||isnan(ang)==1)%concave
-           ang(ang<ang_2)=[];
-           im=[im;i];
-    end
+      if r<=0&&(ang<ang_2||isnan(ang))%concave
+            ang(ang<ang_2);
+            im=[im;i]; %#ok<*AGROW>
+      end
 end
 y2(im,:)=[];
 y1=y2;
