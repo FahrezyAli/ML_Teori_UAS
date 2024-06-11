@@ -64,7 +64,7 @@ for sl = best_feature(Test)
             KAA = Gsker(A,A,p); 
             for i = 1:testnum
 
-                if in(i) == 1 || on(i) == 1     
+                if in(i) == 1 || on(i) == 1     %KSRC when conditions are met   
                     y = testSC(:,i);
                     KAy = Gsker(A,y,p); 
                     [beta,~] = KernelCoorDescent(KAA,KAy,opt);
@@ -77,7 +77,7 @@ for sl = best_feature(Test)
                         continue;
                     end
                     label(i,j) = find(err==min(err)) - 1;           
-                else   
+                else   %SVM when conditions are met
                     [predict_label_s,scores_s] = predict(SVMModel, testsvm(i,:));
                     label(i,j) = predict_label_s;
                 end

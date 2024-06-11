@@ -9,7 +9,7 @@ p = 0.1;
 
 Case = {1:100,101:200,201:300,301:400,1:200,201:400,1:400};
 best_feature = [1017,1013,1019,1018,1013,1017,1018];
-Test = 7;
+Test = 1;
 tennum = 10;
 SvmLabel = label_all(1:10);
 testrange = Case{Test}; 

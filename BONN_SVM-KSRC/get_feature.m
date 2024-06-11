@@ -1,3 +1,5 @@
+% Matlab code for extracting features from Bonn dataset
+
 close all;
 clear;
 clc;
